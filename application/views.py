@@ -16,7 +16,7 @@ def upload_image(request):
         filename = fs.save(image.name, image)
         uploaded_file_url = fs.url(filename)
         
-        return HttpResponse(request, uploaded_file_url)
+        return HttpResponse('Image Uploaded Successfully')
 
     return render(request, 'image_input.html')
 
