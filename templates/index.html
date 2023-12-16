@@ -32,29 +32,17 @@
         </header>
         <button id="close-button">x</button>
         <main class="signup-body">
-          <form action="#">
-            {% comment %}
-            <p>
-              <label for="fullname">Full Name</label>
+          <form action="/signin/" method="post">
+            {% csrf_token %}
+            <p class="form1">
+              <label for="email">Username</label>
 
               <input
                 type="text"
-                placeholder="Enter Name"
-                id="fullname"
+                placeholder="username"
+                id="username"
                 required="true"
-                name="name"
-              />
-            </p>
-            {% endcomment %}
-            <p class="form1">
-              <label for="email">E-mail</label>
-
-              <input
-                type="email"
-                placeholder="email@email.com"
-                id="email"
-                required="true"
-                name="email"
+                name="username"
               />
             </p>
             <p class="form1">
@@ -71,7 +59,7 @@
               <input
                 type="submit"
                 id="submit"
-                value="Create Account"
+                value="login"
                 required="true"
               />
             </p>
