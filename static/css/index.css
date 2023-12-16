@@ -20,6 +20,8 @@
 .container {
 
     text-align: center;
+
+    height:200px;
 }
 
 .container h1 {
@@ -28,8 +30,8 @@
     font-weight: bold;
 }
 
-.container button{
-    display: inline-block;
+#explore{
+    
     color: #000;
     font-size: 24px;
     border: 2px solid #fff;
@@ -38,6 +40,17 @@
     margin-top: 20px;
     cursor: pointer;
     animation: transform 0.5 ease-out;
+    position: fixed;
+}
+
+.text-explore{
+    width: 100%;
+}
+.explored{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .container>button:hover{
@@ -67,3 +80,16 @@
         height: 100%;
     }
 }
+
+
+#login{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    margin-top: 200px;
+}
+

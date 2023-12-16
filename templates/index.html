@@ -8,14 +8,79 @@
   </head>
 
   <body>
+
     <div class="cont">
-      <video autoplay muted loop class="videoback" >
-        <source src="/static/media/nature.hevc.mp4" type="video/mp4" />
+      <video autoplay muted loop class="videoback" id="trim" >
+        <source src="/static/media/naturetrim.mp4" type="video/mp4" />
       </video>
+
+    <div class="text-explore">
+
       <div class="container">
-        <h1>Vruksha Vrista</h1>
-        <button type="submit">Explore</button>
+        <h1 id="typeing"></h1>
       </div>
+
+      <div class="explored">
+        <button type="submit" id="explore">Explore</button>
+      </div>
+
+        </div>
     </div>
+    
+
+    <div id="login">
+        <h2>Login</h2>
+        <span>Please authenticate to continue</span>
+        <form action="/login" method="post">
+        <input type="text"><input type="password">
+        <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+      var myVideo = document.getElementById("trim");
+
+      myVideo.playbackRate = 2.5;
+    </script>
+    <script>
+      const phrases = ["Vruksha Vista", "वृक्ष विस्टा"];
+      let currentPhraseIndex = 0;
+      let currentCharIndex = 0;
+      const typingContainer = document.getElementById("typeing");
+
+      function type() {
+        if (typingContainer) {
+          if (currentCharIndex < phrases[currentPhraseIndex].length) {
+            typingContainer.textContent +=
+              phrases[currentPhraseIndex].charAt(currentCharIndex);
+            currentCharIndex++;
+            setTimeout(type, 200); // Adjust typing speed (milliseconds)
+          } else {
+            setTimeout(erase, 1500); // Wait before starting to erase
+          }
+        }
+      }
+
+      function erase() {
+        if (typingContainer) {
+          if (currentCharIndex> 0) {
+            typingContainer.textContent = phrases[currentPhraseIndex].substring(
+              0,
+              currentCharIndex - 1
+            );
+            currentCharIndex--;
+            setTimeout(erase, 200); // Adjust erasing speed (milliseconds)
+          } else {
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            setTimeout(type, 500); // Wait before typing the next phrase
+          }
+        }
+      }
+
+      setTimeout(type, 500);
+
+      document.getElementById("explore").addEventListener("click", () => {
+        document.getElementById("login").style.display = "block";
+      })
+    </script>
   </body>
 </html>
