@@ -56,4 +56,20 @@ def logout_user(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    context = {
+        'data' : [
+            {
+                'heading' : 'Image Processing',
+                'content_min' : 'Explore advanced image processing techniques to enhance, analyze, and manipulate your digital images effectively',
+                'image' : '/static/media/image_processing.jpg',
+                'content' : 'Dive into the world of advanced image processing with our tools. Enhance, analyze, and manipulate your digital images with ease. From basic photo editing to complex algorithmic processing, our platform offers a comprehensive suite of tools for professionals and hobbyists alike. Discover new ways to bring your images to life!'
+            },
+            {
+                'heading' : 'Google Earth Integration',
+                'content_min' : 'Leverage Google Earth integration for detailed geographical data and immersive mapping experiences.',
+                'image' : 'https://source.unsplash.com/1600x900/?nature,water',
+                'content' : 'Utilize our Google Earth integration to access detailed geographical data and create immersive mapping experiences. This feature allows you to seamlessly incorporate real-world terrain, satellite imagery, and 3D buildings into your projects. Ideal for educators, researchers, and developers, it opens up a world of possibilities for geospatial analysis and visualization.'
+            }
+        ]
+    }
+    return render(request, 'dashboard.html' , context)
