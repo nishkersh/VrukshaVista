@@ -10,7 +10,7 @@
   <body>
 
     <div class="cont">
-      <video autoplay muted loop class="videoback" id="trim">
+      <video autoplay muted loop class="videoback" id="trim" >
         <source src="/static/media/naturetrim.mp4" type="video/mp4" />
       </video>
 
@@ -62,7 +62,7 @@
 
       function erase() {
         if (typingContainer) {
-          if (currentCharIndex > 0) {
+          if (currentCharIndex> 0) {
             typingContainer.textContent = phrases[currentPhraseIndex].substring(
               0,
               currentCharIndex - 1
