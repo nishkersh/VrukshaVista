@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
+import requests
 
 def index(request):
     return render(request, 'index.html')
@@ -19,3 +20,6 @@ def upload_image(request):
         return HttpResponse(request, uploaded_file_url)
 
     return render(request, 'image_input.html')
+
+def google_earth(request):
+    return render(request, 'google_earth.html')
