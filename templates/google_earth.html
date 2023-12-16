@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Google Earth Embed</title>
+    <style>
+        #google-earth {
+            height: 550px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            width: 100%;
+            color: #4CAF50;
+            padding: 10px;
+            margin-bottom: 40px;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&callback=initMap"
+        async defer></script>
+    <script>
+        
+    </script>
+</head>
+
+<body>
+    <h1><span>Google Earth Integration</span></h1>
+    <button>Take Snapshot</button>
+    <div id="google-earth"></div>
+    <script>
+        const map = new google.maps.Map(document.getElementById('google-earth'), {
+            center: { lat: 23.226670906906943, lng: 77.32310944557776 },
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
+            styles: [
+                {
+                    featureType: "all",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }]
+                }
+            ]
+        });
+
+        function initMap() {
+            console.log('Map Loaded');
+        }
+
+        var button = document.querySelector('button');
+        button.addEventListener('click', function () {
+            var lat = map.getCenter().lat();
+            var lng = map.getCenter().lng();
+            console.log(lat, lng);
+        });
+    </script>
+</body>
+
+</html>
