@@ -53,3 +53,7 @@ def signup(request):
 def logout_user(request):
     logout(request)
     return redirect("/")
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard.html')

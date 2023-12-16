@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock title %} | SIH</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <img src="/static/media/Ministry_of_Coal_logo.png" alt="">
+        <div>
+            <img src="/static/media/profile.png">
+            <span>User Name</span>
+        </div>
+    </nav>
+    <div class="sidebar">
+        <ul>
+            <li>Test Image</li>
+            <li>Explore Map</li>
+            <li>About Us</li>
+            <li>Settings</li>
+            <!-- <li>Hello</li> -->
+        </ul>
+        <div class="sidebar-footer">
+            <h3>Vruksha Vista</h3>
+        </div>
+    </div>
+
+    <div class="main-section">
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+
+</html>
