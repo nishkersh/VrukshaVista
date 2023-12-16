@@ -8,79 +8,80 @@
   </head>
 
   <body>
-
     <div class="cont">
-      <video autoplay muted loop class="videoback" id="trim" >
+      <video autoplay muted loop class="videoback" id="trim">
         <source src="/static/media/naturetrim.mp4" type="video/mp4" />
       </video>
 
-    <div class="text-explore">
-
-      <div class="container">
-        <h1 id="typeing"></h1>
-      </div>
-
-      <div class="explored">
-        <button type="submit" id="explore">Explore</button>
-      </div>
-
+      <div class="text-explore" id="text-explore">
+        <div class="container">
+          <h1 id="typeing"></h1>
         </div>
-    </div>
-    
 
+        <div class="explored">
+          <button type="submit" id="explore">Explore</button>
+        </div>
+      </div>
+    </div>
+
+    <!--login page-->
     <div id="login">
-        <h2>Login</h2>
-        <span>Please authenticate to continue</span>
-        <form action="/login" method="post">
-        <input type="text"><input type="password">
-        <button type="submit">Login</button>
-        </form>
+      <div class="inner-box">
+        <header class="signup-header">
+          <h1>Authenticate yourself !<br /></h1>
+        </header>
+        <button id="close-button">x</button>
+        <main class="signup-body">
+          <form action="#">
+            {% comment %}
+            <p>
+              <label for="fullname">Full Name</label>
+
+              <input
+                type="text"
+                placeholder="Enter Name"
+                id="fullname"
+                required="true"
+                name="name"
+              />
+            </p>
+            {% endcomment %}
+            <p class="form1">
+              <label for="email">E-mail</label>
+
+              <input
+                type="email"
+                placeholder="email@email.com"
+                id="email"
+                required="true"
+                name="email"
+              />
+            </p>
+            <p class="form1">
+              <label for="fullname">Password</label>
+              <input
+                type="password"
+                placeholder="Atleast 8 characters"
+                id="password"
+                required="true"
+                name="password"
+              />
+            </p>
+            <p class="form1">
+              <input
+                type="submit"
+                id="submit"
+                value="Create Account"
+                required="true"
+              />
+            </p>
+          </form>
+        </main>
+        <footer class="signup-footer">
+          <p>Don't have an account ? <a href="#" target="blank">Sign Up</a></p>
+        </footer>
+      </div>
     </div>
-    <script>
-      var myVideo = document.getElementById("trim");
-
-      myVideo.playbackRate = 2.5;
-    </script>
-    <script>
-      const phrases = ["Vruksha Vista", "वृक्ष विस्टा"];
-      let currentPhraseIndex = 0;
-      let currentCharIndex = 0;
-      const typingContainer = document.getElementById("typeing");
-
-      function type() {
-        if (typingContainer) {
-          if (currentCharIndex < phrases[currentPhraseIndex].length) {
-            typingContainer.textContent +=
-              phrases[currentPhraseIndex].charAt(currentCharIndex);
-            currentCharIndex++;
-            setTimeout(type, 200); // Adjust typing speed (milliseconds)
-          } else {
-            setTimeout(erase, 1500); // Wait before starting to erase
-          }
-        }
-      }
-
-      function erase() {
-        if (typingContainer) {
-          if (currentCharIndex> 0) {
-            typingContainer.textContent = phrases[currentPhraseIndex].substring(
-              0,
-              currentCharIndex - 1
-            );
-            currentCharIndex--;
-            setTimeout(erase, 200); // Adjust erasing speed (milliseconds)
-          } else {
-            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-            setTimeout(type, 500); // Wait before typing the next phrase
-          }
-        }
-      }
-
-      setTimeout(type, 500);
-
-      document.getElementById("explore").addEventListener("click", () => {
-        document.getElementById("login").style.display = "block";
-      })
-    </script>
   </body>
+  <script src="static\js\index.js"></script>
 </html>
