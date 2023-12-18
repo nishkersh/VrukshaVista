@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px 0 10px;
+    >h1 {
+        flex: 1;
+    }
+    >button{
+        border: none;
+        background-color: rgba(0, 0, 255, 0.69);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 12px;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+}
+
+.header>button:hover{
+    background-color: blue;
+}
+
+.intoductory_para {
+    padding: 20px 0;
+}
+
+#google-earth {
+    height: 550px;
+    width: 100%;
+}

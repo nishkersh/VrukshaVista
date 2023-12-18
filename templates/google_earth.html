@@ -1,58 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Google Earth Embed</title>
-    <style>
-        #google-earth {
-            height: 550px;
-            width: 100%;
-        }
+{% block title %}Expolre Map{% endblock title %}
 
-        h1 {
-            text-align: center;
-            width: 100%;
-            color: #4CAF50;
-            padding: 10px;
-            margin-bottom: 40px;
-        }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&callback=initMap"
-        async defer></script>
-    <script>
-        
-    </script>
-</head>
+{% block css %}
+<link rel="stylesheet" href="/static/css/google_earth.css">
+{% endblock css %}
 
-<body>
-    <h1><span>Google Earth Integration</span></h1>
-    <button>Take Snapshot</button>
-    <div id="google-earth"></div>
-    <script>
-        const map = new google.maps.Map(document.getElementById('google-earth'), {
-            center: { lat: 23.226670906906943, lng: 77.32310944557776 },
-            zoom: 17,
-            mapTypeId: google.maps.MapTypeId.SATELLITE,
-            styles: [
-                {
-                    featureType: "all",
-                    elementType: "labels",
-                    stylers: [{ visibility: "on" }]
-                }
-            ]
-        });
+{% block head_scripts %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&callback=initMap"
+    async defer></script>
+{% endblock head_scripts %}
 
-        function initMap() {
-            console.log('Map Loaded');
-        }
+{% block content %}
 
-        var button = document.querySelector('button');
-        button.addEventListener('click', function () {
-            var lat = map.getCenter().lat();
-            var lng = map.getCenter().lng();
-            console.log(lat, lng);
-        });
-    </script>
-</body>
+<div class="header">
+    <h1>
+        Google Earth Integration
+    </h1>
+    <button>
+        Take Snapshot
+    </button>
+</div>
 
-</html>
+<p class="intoductory_para">
+    We are thrilled to showcase that how our AI models work seamlessly with realtime Google Earth visualization. <strong>{This
+        text needs to be edited}</strong>
+</p>
+
+<div id="google-earth"></div>
+
+{% endblock content %}

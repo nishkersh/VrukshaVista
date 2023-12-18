@@ -20,7 +20,7 @@ nav {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 
-    >img {
+    >a>img {
         width: 150px;
         margin-left: 20px;
     }
@@ -77,15 +77,17 @@ nav {
             left: -5px;
             color: #7D7D7D;
 
+            >a {
+                text-decoration: none;
+                color: #7D7D7D;
+            }
+
             &:hover {
                 color: #272DBC;
                 background: #272DBC1A;
-            }
-
-            >a {
-                text-decoration: none;
-                color: #000;
-                font-weight: 500;
+                >a{
+                    color: #272DBC;
+                }
             }
         }
     }
@@ -98,7 +100,8 @@ nav {
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    >img{
+
+    >img {
         width: 100%;
         /* height: 150px; */
         height: auto;

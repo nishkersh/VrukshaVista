@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px 0 10px;
+    >h1 {
+        flex: 1;
+    }
+    /* >button{
+        border: none;
+        background-color: rgba(0, 128, 0, 0.729);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 12px;
+        margin-right: 20px;
+        cursor: pointer;
+    } */
+}
+
+.intoductory_para {
+    padding: 20px 0;
+}
+
+.input_container_wrapper{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    >form{
+        width: 80%;
+        border: 2px dashed #ccc;
+        padding: 25px 20px;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

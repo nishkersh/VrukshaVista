@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %}
+    <link rel="stylesheet" href="style.css"> {% endcomment %}
+    <style>
+        /* Basic styling for the layout */
+        body {
+
+            margin: 0;
+        }
+
+        /* Left dashboard styling */
+        #left-dashboard {
+            background-color: white;
+            color: rgb(164, 19, 19);
+            width: 250px;
+            /* Adjust the width as needed */
+            height: 100vh;
+            /* Full height of the viewport */
+            padding-left: 20px;
+            box-sizing: border-box;
+            position: fixed;
+
+        }
+
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            #left-dashboard {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .sidebar {
+
+            display: flex;
+            flex-direction: column;
+            height: 86vh;
+            top: 1rem;
+            justify-content: left;
+            background-color: #C8DBBE;
+            color: white;
+
+        }
+
+        .sidebar a {
+
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 3.7rem;
+            z-index: 2;
+
+        }
+
+        /* .sidebar a:hover{
+         background-color: rgba(82, 214, 97, 0.744);
+         color:white;
+         border-radius: 1rem;
+     } */
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-item {
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #829460;
+            /* Darken the background on hover */
+        }
+
+        .menu-item.selected {
+            background-color: #829460;
+            /* Highlight the selected item */
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .menu-item h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        #main-content {
+
+            display: grid;
+            grid-template-columns: 4fr 2fr;
+            gap: 50px;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+        }
+
+        #upload {
+
+            height: 20rem;
+            border-radius: 10px;
+            background-color: rgb(100, 21, 21);
+
+            margin-left: 2rem;
+
+
+        }
+
+        #content {
+
+            height: 20rem;
+            border-radius: 10px;
+            background-color: rgb(235, 227, 227);
+            margin-left: 2rem;
+
+
+        }
+
+        /*drag and drop menu */
+
+        .image-box {
+            width: 300px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .drop-area {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .drop-area:hover {
+            background-color: #f0f8ff;
+            /* Light blue background on hover */
+        }
+
+        .instructions {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        #preview {
+            display: none;
+        }
+
+        #preview img {
+            max-width: 100%;
+            max-height: 200px;
+            /* Adjust as needed */
+        }
+
+        /*navbar data */
+        .navbar {
+            background-color: white;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 70px;
+            /* Adjust as needed */
+            padding-left: 20%;
+            padding-top: 10%;
+            left: 50px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            margin-right: 8px;
+            max-height: 60px;
+            /* Adjust as needed */
+        }
+
+        .user-name {
+            font-size: 15px;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <head>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images\coal_logo.png" alt="Company Logo">
+            </div>
+            <div class="user-info">
+                <span class="user-name">Hello User</span>
+                <img class="user-logo" src="images/user-logo.jpg" alt="User Logo">
+
+            </div>
+        </nav>
+    </head>
+
+    <div>
+        <div id="left-dashboard">
+
+            <div class="sidebar">
+
+                <ul>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>Home</h3>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>Contact</h3>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>About</h3>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>Subscri</h3>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>Subscri</h3>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>Subscri</h3>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" onclick="selectMenuItem(this)">
+                            <h3>Subscri</h3>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div> <!--left dashboard-->
+
+        <div id="main-content">
+
+            <div class="image-box" id="imageBox">
+                <div class="drop-area" id="dropArea">
+                    <span class="instructions">Drag & Drop Image Here</span>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+                <div class="preview" id="preview"></div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+
+    function preventDefaults(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    function highlight() {
+        dropArea.classList.add('highlight');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('highlight');
+    }
+
+    function handleDrop(event) {
+        const files = event.dataTransfer.files;
+        handleFiles(files);
+    }
+
+    function handleFiles(files) {
+        for (const file of files) {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`;
+                    preview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    fileInput.addEventListener('change', function () {
+        handleFiles(this.files);
+    });
+
+
+    function selectMenuItem(clickedItem) {
+        var menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(function (item) {
+            item.classList.remove('selected');
+        });
+
+        clickedItem.closest('.menu-item').classList.add('selected');
+    }
+</script>
+
+</html>

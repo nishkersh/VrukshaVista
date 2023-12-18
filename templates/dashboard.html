@@ -17,20 +17,18 @@
     </p>
     <div>
         {%for item in data%}
-        <div class="data-holder">
+        <a href="{{item.redirect_url}}" class="data-holder">
             <h2>
                 {{ item.heading }}
             </h2>
-            <div class="data-wrapper">
-                <div>
-                    <img src="{{ item.image }}" width="50%" height="auto" />
-                </div>
-                <span>{{ item.content_min }}</span>
+            <div class="image-holder">
+                <img src="{{ item.image }}"/>
             </div>
+            <span>{{ item.content_min }}</span>
             <div class="content">
                 {{ item.content }}
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 </div>
