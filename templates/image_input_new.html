@@ -1,32 +1,31 @@
-{% extends "base.html" %}
-
-{% block css %}
-<link rel="stylesheet" href="/static/css/image_input.css">
-{% endblock css %}
-
-{% block content %}
+{% extends "base.html" %} {% block css %}
+<link rel="stylesheet" href="/static/css/image_input.css" />
+{% endblock css %} {% block content %}
 
 <div class="header">
-    <h1>
-        Image Processing
-    </h1>
+  <h1>Image Processing</h1>
 </div>
 
 <p class="intoductory_para">
-    You can upload image here to get deatiled data on type of vegetation , number of trees and many more. Make sure to
-    give it a try.
-    <strong>{Text needs to be edited}</strong>
+  You can upload image here to get deatiled data on type of vegetation , number
+  of trees and many more. Make sure to give it a try.
+  <strong>{Text needs to be edited}</strong>
 </p>
 
 <div class="input_container_wrapper">
-    <form id="uploadForm" action="/upload_image/" method="post" enctype="multipart/form-data">
-        <h2>Upload Image Here</h2>
-            {% csrf_token %}
-            <label for="image">Click here</label>
-            <input type="file" id="image" name="image" required hidden>
-            <input type="submit" value="Upload Image">
-    </form>
-</div>
+  <form
+    id="uploadForm"
+    action="/upload_image/"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <h2>Upload Image Here</h2>
+    {% csrf_token %}
+    <button class="click_img">Click here</button>
 
+    <input type="file" id="image" name="image" required hidden />
+    <input id="input_img" type="submit" value="Upload Image" />
+  </form>
+</div>
 
 {% endblock content %}
