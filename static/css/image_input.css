@@ -34,5 +34,28 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        >label{
+            width: 13%;
+            height: auto;
+            border: none;
+            overflow: hidden;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #6c6c6c;
+            margin: 30px 0px;
+            >img{
+                width: 100%;
+                height: auto;
+                padding: 5px;
+            }
+        }
     }
+}
+
+.upload_btn{
+    border: none;
+    background-color: rgba(0, 128, 0, 0.729);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
 }

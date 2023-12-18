@@ -21,10 +21,12 @@
 <div class="input_container_wrapper">
     <form id="uploadForm" action="/upload_image/" method="post" enctype="multipart/form-data">
         <h2>Upload Image Here</h2>
-            {% csrf_token %}
-            <label for="image">Click here</label>
-            <input type="file" id="image" name="image" required hidden>
-            <input type="submit" value="Upload Image">
+        {% csrf_token %}
+        <label for="image">
+            <img src="/static/media/camera1.jpg">
+        </label>
+        <input type="file" id="image" name="image" required hidden>
+        <button type="submit" class="upload_btn">Upload Image</button>
     </form>
 </div>
 
