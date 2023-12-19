@@ -19,5 +19,18 @@ var button = document.querySelector('button');
 button.addEventListener('click', function () {
     var lat = map.getCenter().lat();
     var lng = map.getCenter().lng();
-    console.log(lat, lng);
+    var zoom = map.getZoom();
+
+    fetch('/map', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ lat: lat, lng: lng, zoom: zoom })
+    }).then(function (response) {
+        alert(response.json());
+    }).then(function (data) {
+        alert(data);
+    });
+
 });

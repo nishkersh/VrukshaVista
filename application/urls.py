@@ -9,4 +9,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout/', views.logout_user, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('map/', views.map_data, name='map'),
+    path('google_earth_old/', views.google_earth_old, name='google_earth_old'),
 ]
