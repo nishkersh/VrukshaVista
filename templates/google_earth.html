@@ -7,7 +7,9 @@
 {% endblock css %}
 
 {% block head_scripts %}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&callback=initMap"
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&libraries=places&callback=initMap"
     async defer></script>
 {% endblock head_scripts %}
 
@@ -15,7 +17,7 @@
 
 <div class="header">
     <h1>
-        Google Earth Integration
+        Google Maps Integration
     </h1>
     <button id="snapshot_btn">
         Take Snapshot
@@ -23,40 +25,99 @@
 </div>
 
 <p class="intoductory_para">
-    We are thrilled to showcase that how our AI models work seamlessly with realtime Google Earth visualization. <strong>{This
+    We are thrilled to showcase that how our AI models work seamlessly with realtime Google Earth visualization.
+    <strong>{This
         text needs to be edited}</strong>
 </p>
 
-<div id="google-earth"></div>
+<div class="map-wrapper">
+    <div>
+        <h2 class="search-heading">Search for a location</h2>
+        <div class="search-bar">
+            <input id="place-search" type="text" placeholder="Enter a location">
+        </div>
+    </div>
+    <div id="google-earth"></div>
+</div>
 
 {% endblock content %}
 
 {% block js %}
 <script>
-    const map = new google.maps.Map(document.getElementById('google-earth'), {
-    center: { lat: 23.226670906906943, lng: 77.32310944557776 },
-    zoom: 17,
-    mapTypeId: google.maps.MapTypeId.SATELLITE,
-    styles: [
-        {
-            featureType: "all",
-            elementType: "labels",
-            stylers: [{ visibility: "on" }]
-        }
-    ]
-});
+    let map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('google-earth'), {
+            center: { lat: 22.06586100913466 , lng: 81.13426510378851 },
+            zoom: 4,
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
+            tilt: 0,
+            heading: 0,
+            disableDefaultUI: true,
+            zoomControl: true,
+            streetViewControl: false,
+        });
 
-function initMap() {
-    console.log('Map Loaded');
-}
+        const input = document.getElementById("place-search");
+        const searchBox = new google.maps.places.SearchBox(input);
 
-var button = document.getElementById('snapshot_btn');
-button.addEventListener('click', function () {
-    var lat = map.getCenter().lat();
-    var lng = map.getCenter().lng();
-    var zoom = map.getZoom();
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+        });
 
-    window.location.href = '/map?lat=' + lat + '&lng=' + lng + '&zoom=' + zoom;
-});
+        let markers = [];
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+
+            markers.forEach((marker) => {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach((place) => {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                const icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25),
+                };
+
+                markers.push(
+                    new google.maps.Marker({
+                        map,
+                        icon,
+                        title: place.name,
+                        position: place.geometry.location,
+                    })
+                );
+
+                if (place.geometry.viewport) {
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+    }
+
+    var button = document.getElementById('snapshot_btn');
+    button.addEventListener('click', function () {
+        var lat = map.getCenter().lat();
+        var lng = map.getCenter().lng();
+        var zoom = map.getZoom();
+
+        window.location.href = '/map?lat=' + lat + '&lng=' + lng + '&zoom=' + zoom;
+    });
 </script>
+
 {% endblock js %}

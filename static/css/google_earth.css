@@ -27,4 +27,44 @@
 #google-earth {
     height: 550px;
     width: 100%;
+    position: relative;
+    right: 5px;
+}
+
+.map-wrapper{
+    height: 550px;
+    width: 100%;
+    display: flex;    
+    padding: 10px;
+}
+
+.map-wrapper>div{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#search-bar{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#place-search{
+    width: 80%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+    margin: 20px 10px;
+}
+
+.search-heading{
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 10px 10px;
 }
