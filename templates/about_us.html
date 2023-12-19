@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% block css %}
+<link rel="stylesheet" href="/static/css/image_input.css" />
+
+{% endblock css %} {% block content %}
+
+<div class="about_us">
+  <div class="header">
+    <h1>About Us</h1>
+  </div>
+
+  <p>Here is our Team Details.</p>
+
+  <div class="disp">
+    <div class="about_con">
+      <div class="tree_img">
+        <img src="/static/media/design_tree.png" alt="tree image" />
+      </div>
+
+      <div class="team">
+        <h1>Team Vrukhsvrishta</h1>
+        <p>
+          We are <span>Team Vrukshavista</span> from Panjab University,UIET
+          Chandigarh. We are here IES Bhopal, to participate in the prestigious
+          Smart India Hackathon. Our team involves our leader <span></span>, and
+          the members are-
+          <span
+            >Front developers as Vishal Kumar, Avishi Jain, Anurag Kanswal</span
+          >
+          <span>ML/AI leads as Reek Chatterjee and Abhijit Singh</span> and the
+          backend developer
+          <span>Dhruv Bhatt</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="connect">
+      <div>
+        <h2>Our Objectives</h2>
+      </div>
+      <div>
+        <ul class="list">
+          <li>
+            <h4>Image Data Analysis:</h4>
+            <p>
+              Develop a computer vision algorithm for analyzing satellite
+              imagery or aerial photographs to accurately detect and identify
+              trees within designated forest areas. The algorithm should account
+              for variations in tree species, sizes, and environmental
+              conditions for reliable results.
+            </p>
+          </li>
+          <li>
+            <h4>Tree Counting and Categorization:</h4>
+            <p>
+              Design a system to count the number of trees in the specified area
+              and categorize them based on species or relevant parameters like
+              diameter (girth). The solution aims to provide accurate and
+              detailed information about the tree population to support
+              decision-making during land diversion projects.
+            </p>
+          </li>
+          <li>
+            <h4>Accuracy and Validation:</h4>
+            <p>
+              Implement mechanisms to validate the accuracy of the image
+              analytics solution by comparing results with ground-truth data
+              obtained through manual surveys or reliable methods. The objective
+              is to achieve a high level of accuracy and minimize false
+              positives or false negatives in tree identification and counting.
+            </p>
+          </li>
+          <li>
+            <h4>Scalability and Efficiency:</h4>
+            <p>
+              Develop an efficient and scalable solution capable of processing
+              large volumes of image data within a reasonable timeframe.
+              Consider optimization techniques and parallel processing
+              approaches to ensure timely results, especially for large forest
+              areas or time-sensitive projects.
+            </p>
+          </li>
+          <li>
+            <h4>Integration and Visualization:</h4>
+            <p>
+              Enable seamless integration of the image analytics solution with
+              existing forest management systems or tools. Provide
+              visualizations and interactive interfaces for users to explore and
+              interpret results easily.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {%endblock content%}
+</div>
