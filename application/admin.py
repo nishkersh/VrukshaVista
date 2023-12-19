@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register(Google_Captured_Image)
+

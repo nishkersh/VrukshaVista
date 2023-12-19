@@ -7,6 +7,7 @@
         #google-earth {
             height: 550px;
             width: 100%;
+            background-color: antiquewhite;
         }
 
         h1 {
@@ -19,40 +20,85 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&callback=initMap"
         async defer></script>
-    <script>
-        
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes&libraries=places&callback=initMap" async defer></script>
 </head>
 
 <body>
-    <h1><span>Google Earth Integration</span></h1>
-    <button>Take Snapshot</button>
     <div id="google-earth"></div>
+    <div class="search-bar">
+        <input id="place-search" type="text" placeholder="Enter a location">
+    </div>
     <script>
-        const map = new google.maps.Map(document.getElementById('google-earth'), {
-            center: { lat: 23.226670906906943, lng: 77.32310944557776 },
-            zoom: 17,
-            mapTypeId: google.maps.MapTypeId.SATELLITE,
-            styles: [
-                {
-                    featureType: "all",
-                    elementType: "labels",
-                    stylers: [{ visibility: "on" }]
-                }
-            ]
-        });
-
+        let map;
         function initMap() {
-            console.log('Map Loaded');
+            map = new google.maps.Map(document.getElementById('google-earth'), {
+                center: { lat: 23.226670906906943, lng: 77.32310944557776 },
+                zoom: 17,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                styles: [
+                    {
+                        featureType: "all",
+                        elementType: "labels",
+                        stylers: [{ visibility: "on" }]
+                    }
+                ]
+            });
+    
+            const input = document.getElementById("place-search");
+            const searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    
+            map.addListener("bounds_changed", () => {
+                searchBox.setBounds(map.getBounds());
+            });
+    
+            let markers = [];
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+    
+                if (places.length == 0) {
+                    return;
+                }
+    
+                markers.forEach((marker) => {
+                    marker.setMap(null);
+                });
+                markers = [];
+    
+                const bounds = new google.maps.LatLngBounds();
+                places.forEach((place) => {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    const icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25),
+                    };
+    
+                    markers.push(
+                        new google.maps.Marker({
+                            map,
+                            icon,
+                            title: place.name,
+                            position: place.geometry.location,
+                        })
+                    );
+    
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
         }
-
-        var button = document.querySelector('button');
-        button.addEventListener('click', function () {
-            var lat = map.getCenter().lat();
-            var lng = map.getCenter().lng();
-            console.log(lat, lng);
-        });
     </script>
+        
 </body>
 
 </html>

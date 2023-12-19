@@ -17,7 +17,7 @@
     <h1>
         Google Earth Integration
     </h1>
-    <button>
+    <button id="snapshot_btn">
         Take Snapshot
     </button>
 </div>
@@ -30,3 +30,33 @@
 <div id="google-earth"></div>
 
 {% endblock content %}
+
+{% block js %}
+<script>
+    const map = new google.maps.Map(document.getElementById('google-earth'), {
+    center: { lat: 23.226670906906943, lng: 77.32310944557776 },
+    zoom: 17,
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+    styles: [
+        {
+            featureType: "all",
+            elementType: "labels",
+            stylers: [{ visibility: "on" }]
+        }
+    ]
+});
+
+function initMap() {
+    console.log('Map Loaded');
+}
+
+var button = document.getElementById('snapshot_btn');
+button.addEventListener('click', function () {
+    var lat = map.getCenter().lat();
+    var lng = map.getCenter().lng();
+    var zoom = map.getZoom();
+
+    window.location.href = '/map?lat=' + lat + '&lng=' + lng + '&zoom=' + zoom;
+});
+</script>
+{% endblock js %}
