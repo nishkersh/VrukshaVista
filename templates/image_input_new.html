@@ -21,11 +21,9 @@
   >
     <h2>Upload Image Here</h2>
     {% csrf_token %}
-
-    <label for="image" class="click_img"> Click here </label>
+    <button class="click_img">Click here</button>
 
     <input type="file" id="image" name="image" required hidden />
-
     <input id="input_img" type="submit" value="Upload Image" />
   </form>
 </div>
