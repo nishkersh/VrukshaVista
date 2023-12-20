@@ -5,11 +5,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-
 from .models import Google_Captured_Image
 import datetime
 from io import BytesIO
 from django.core.files.images import ImageFile
+from .functions import deepforest
 
 def index(request):
     return render(request, 'index.html')
@@ -21,7 +21,8 @@ def upload_image(request):
         filename = fs.save(image.name, image)
         uploaded_file_url = fs.url(filename)
         
-        return HttpResponse('Image Uploaded Successfully')
+        uploaded_file_url = uploaded_file_url.replace("/media/", "/uploaded_images/")
+        return HttpResponse(deepforest.analyze_url(uploaded_file_url))
 
     return render(request, 'image_input_new.html')
 
@@ -30,7 +31,6 @@ def google_earth(request):
 
 def google_earth_old(request):
     return render(request, 'google_earth_old.html')
-
 
 def map_data(request):
     lat = request.GET.get('lat')
@@ -43,40 +43,18 @@ def map_data(request):
             temp_img = BytesIO(response.content)
             image = ImageFile(temp_img)
 
-            # Save image to /uploaded_images/google/ folder with a timestamp
             fs = FileSystemStorage()
             timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            filename = fs.save(f"google_images/{lon},{lat},{zoom}_{timestamp}.jpg", image)
+            filename = fs.save(f"google_images/{zoom}_{timestamp}.jpg", image)
             uploaded_file_url = fs.url(filename)
 
-            return HttpResponse(uploaded_file_url)
+            uploaded_file_url = uploaded_file_url.replace("/media/", "/uploaded_images/")
+
+            return HttpResponse(deepforest.analyze_url(uploaded_file_url))
         else:
             return HttpResponse("Failed to fetch image from Google Maps", status=500)
     except Exception as e:
         return HttpResponse(f"An error occurred: {str(e)}", status=500)
-
-
-
-
-# def map_data(request):
-#     if request.method == 'POST':
-#         lat = request.POST.get('lat')
-#         lon = request.POST.get('lon')
-#         zoom = request.POST.get('zoom')
-
-#         # https://maps.googleapis.com/maps/api/staticmap?scale=2&center=30.7580,76.7685&zoom=20&size=2000x2000&maptype=satellite&key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes
-
-#         image = requests.get('https://maps.googleapis.com/maps/api/staticmap?scale=2&center='+lat+','+lon+'&zoom='+zoom+'&size=2000x2000&maptype=satellite&key=AIzaSyBWqUl-HlAe-bbl_jNiFdrFu5gEcLe7Bes')
-
-#         if lat and lon and zoom and image:
-#             Google_Captured_Image.objects.create(lat=lat, lon=lon, zoom=zoom,image = image, user=request.user)
-#             return redirect('/google_earth')
-        
-#         else:
-#             return HttpResponse('Please enter all the fields')
-        
-#     return HttpResponse('Wrong Request')
-
 
 def signin(request):
     if request.method == 'POST':
@@ -133,3 +111,6 @@ def dashboard(request):
 
 def about_us(request):
     return render(request, 'about_us.html')
+
+def result(request):
+    return render(request, 'result.html')

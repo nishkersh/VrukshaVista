@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/result.css">
+{% endblock css %}
+
+{% block content %}
+
+<div class="result-main-wrappper">
+    <div class="result-wrapper">
+
+    </div>
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <div class="chatbot-header-title">
+                <h3>Coal India Research Bot</h3>
+            </div>
+            <div class="chatbot-header-close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="chatbot-body">
+            <div class="chatbot-body-content">
+                <div class="chatbot-body-content-wrapper">
+                    <div class="chatbot-body-content-wrapper-message">
+                        <div class="chatbot-body-content-wrapper-message-text">
+                            <p>Hi, I'm a chatbot. I can help you to find the best place to eat in your city.</p>
+                        </div>
+                    </div>
+                    <div class="chatbot-body-content-wrapper-message">
+                        <div class="chatbot-body-content-wrapper-message-text">
+                            <p>What is your city?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-body-input">
+                    <input type="text" name="chatbot-input" id="chatbot-input" placeholder="Type your city here...">
+                    <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="/static/js/result.js"></script>
+{% endblock js %}

@@ -13,19 +13,28 @@
 </p>
 
 <div class="input_container_wrapper">
-  <form
-    id="uploadForm"
-    action="/upload_image/"
-    method="post"
-    enctype="multipart/form-data"
-  >
-    <h2>Upload Image Here</h2>
+  <form id="uploadForm" action="/upload_image/" method="post">
     {% csrf_token %}
-    <button class="click_img">Click here</button>
-
-    <input type="file" id="image" name="image" required hidden />
+    <label for="image" class="image_label">
+      <img src="/static/media/camera1-removebg-preview.png" alt="upload" />
+    </label>
+    <input type="file" id="image" name="image" required hidden onchange="showUploadButton()" />
     <input id="input_img" type="submit" value="Upload Image" />
   </form>
 </div>
+
+<script>
+  function showUploadButton() {
+    var imageInput = document.getElementById('image');
+    var uploadButton = document.getElementById('input_img');
+
+    if (imageInput.files.length > 0) {
+      uploadButton.style.display = 'block';
+    } else {
+      uploadButton.style.display = 'none';
+    }
+  }
+  showUploadButton();
+</script>
 
 {% endblock content %}

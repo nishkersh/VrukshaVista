@@ -12,4 +12,5 @@ urlpatterns = [
     path('about_us/', views.about_us, name='about_us'),
     path('map/', views.map_data, name='map'),
     path('google_earth_old/', views.google_earth_old, name='google_earth_old'),
+    path('result/', views.result, name='result'),
 ]
