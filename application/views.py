@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'index.html')
 
 def upload_image(request):
-    if request.method == 'POST' and request.FILES['image']:
+    if request.method == 'POST' and 'image' in request.FILES:
         image = request.FILES['image']
         fs = FileSystemStorage()
         filename = fs.save(image.name, image)

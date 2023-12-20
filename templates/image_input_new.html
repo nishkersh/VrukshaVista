@@ -9,11 +9,10 @@
 <p class="intoductory_para">
   You can upload image here to get deatiled data on type of vegetation , number
   of trees and many more. Make sure to give it a try.
-  <strong>{Text needs to be edited}</strong>
 </p>
 
 <div class="input_container_wrapper">
-  <form id="uploadForm" action="/upload_image/" method="post">
+  <form id="uploadForm" action="/upload_image/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="image" class="image_label">
       <img src="/static/media/camera1-removebg-preview.png" alt="upload" />
