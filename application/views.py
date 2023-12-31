@@ -9,7 +9,7 @@ from .models import Google_Captured_Image
 import datetime
 from io import BytesIO
 from django.core.files.images import ImageFile
-from .functions import deepforest
+# from .functions import deepforest
 
 def index(request):
     return render(request, 'index.html')
@@ -22,7 +22,7 @@ def upload_image(request):
         uploaded_file_url = fs.url(filename)
         
         uploaded_file_url = uploaded_file_url.replace("/media/", "/uploaded_images/")
-        return HttpResponse(deepforest.analyze_url(uploaded_file_url))
+        # return HttpResponse(deepforest.analyze_url(uploaded_file_url))
 
     return render(request, 'image_input_new.html')
 
@@ -50,7 +50,8 @@ def map_data(request):
 
             uploaded_file_url = uploaded_file_url.replace("/media/", "/uploaded_images/")
 
-            return HttpResponse(deepforest.analyze_url(uploaded_file_url))
+            # return HttpResponse(deepforest.analyze_url(uploaded_file_url))
+            return redirect("/google_earth")
         else:
             return HttpResponse("Failed to fetch image from Google Maps", status=500)
     except Exception as e:
